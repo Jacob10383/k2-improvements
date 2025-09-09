@@ -82,7 +82,14 @@ python ${SCRIPT_DIR}/../../scripts/ensure_included.py ~/printer_data/config/cust
 
 # make this a patch
 cd ~/klipper/klippy/extras
-patch < ${SCRIPT_DIR}/homing.patch
+#patch < ${SCRIPT_DIR}/homing.patch
+# replace conditional prtouch_v3 lookup with scanner lookup
+sed -i "s|self\.prtouch_v3 = self\.printer\.lookup_object('prtouch_v3') if self\.printer\.objects\.get('prtouch_v3') else None|self.prtouch_v3 = self.printer.lookup_object('scanner')|" homing.py || true
+# replace direct prtouch_v3 lookup with scanner lookup (legacy pattern)
+sed -i "s|self\.prtouch_v3 = printer\.lookup_object('prtouch_v3')|self.prtouch_v3 = self.printer.lookup_object('scanner')|" homing.py || true
+# comment out suspended_det_status block
+sed -i "s|^\([[:space:]]*\)if self\.prtouch_v3 is not None:|\1# if self.prtouch_v3 is not None:|" homing.py || true
+sed -i "s|^\([[:space:]]*\)suspended_det_status = self\.prtouch_v3\.get_suspended_det_status()|\1# suspended_det_status = self.prtouch_v3.get_suspended_det_status()|" homing.py || true
 rm -f klipper/klippy/extras/homing.pyc
 cd -
 
