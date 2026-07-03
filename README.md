@@ -1,5 +1,17 @@
 # K2 Improvements
 
+## Firmware & Cartographer Support
+
+**Firmware compatibility:** Users have reported it working on any Creality firmware up to 1.1.5.5. Firmware 1.1.6.1 made no relevant file changes, so it is likely compatible too.
+
+I now use my own firmware instead of Creality firmware, so I no longer use this project. If interested, you can check it out on Discord: <https://discord.gg/RcnUFd7dfX>
+
+**Cartographer Support:**
+
+- Supports Cartographer v3 and v4
+- Includes custom flash tool for flashing either version directly on the K2
+- Includes new Cartographer plugin with custom modifications for K2 compatibility and optimizations
+
 ## Live Component Status vs Mainline
 
 [![Fluidd](https://img.shields.io/badge/dynamic/json?url=https://api.github.com/repos/fluidd-core/fluidd/compare/develop...Jacob10383:fluidd:k2&query=$.behind_by&label=Fluidd&suffix=%20commits%20behind&color=blue&style=for-the-badge&logo=github)](https://github.com/Jacob10383/fluidd/tree/k2)  
@@ -12,19 +24,6 @@
 ![Cartographer Last Update](https://img.shields.io/badge/dynamic/json?url=https://gist.githubusercontent.com/Jacob10383/f94d1bab6f84f53cd0a88e33c528d196/raw/cartographer-last-update.json&query=$.date&label=Last%20Synced&style=flat-square&color=gray)
 
 *Tracks my forks vs upstream as updates happen there, not here.*
-
-## Firmware & Cartographer Support
-
-**Recommended Firmware:** 1.1.3.13
-
-> [!WARNING]
-> 1.1.4.x is "compatabile" but the firmware itself has numerous known issues. Timing problems can be exacerbated when using Cartographer.
-
-**Cartographer Support:**
-
-- Supports Cartographer v3 and v4
-- Includes custom flash tool for flashing either version directly on the K2
-- Includes new Cartographer plugin with custom modifications for K2 compatibility and optimizations
 
 ## DISCLAIMER
 
