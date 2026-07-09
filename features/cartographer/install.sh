@@ -46,6 +46,17 @@ fi
 
 # update printer config
 python ${SCRIPT_DIR}/alter_config.py
+# alter_config.py removes the active [prtouch_v3] section but is unaware of
+# Klipper's SAVE_CONFIG block (lines prefixed with `#*# `). Any printer that
+# has run prtouch_v3 calibration before this install will have a stale
+# `#*# [prtouch_v3]` header at the bottom of printer.cfg, which Klipper
+# loads back into the live config and then errors out:
+#   "Option 'step_swap_pin' in section 'prtouch_v3' must be specified"
+# Strip just the orphan header line so Klipper no longer tries to load the
+# section.
+if [ -f ~/printer_data/config/printer.cfg ]; then
+    sed -i '/^#\*# \[prtouch_v3\]$/d' ~/printer_data/config/printer.cfg
+fi
 python ${SCRIPT_DIR}/../../scripts/ensure_included.py \
     ~/printer_data/config/custom/main.cfg prtouch_v3.cfg True
 python ${SCRIPT_DIR}/../../scripts/ensure_included.py \
